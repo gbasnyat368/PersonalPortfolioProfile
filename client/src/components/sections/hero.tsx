@@ -2,6 +2,7 @@ import { User, ArrowRight, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { profileData } from '@/lib/data';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
+import profilePhoto from '@assets/profile photo_1751644618081.jpg';
 
 export function HeroSection() {
   const { scrollToSection } = useSmoothScroll();
@@ -11,7 +12,7 @@ export function HeroSection() {
       <div className="max-w-2xl mx-auto px-6 text-center">
         <div className="mb-12">
           <img
-            src="/attached_assets/profile photo_1751644618081.jpg"
+            src={profilePhoto}
             alt="Gaurav Basnyat"
             className="w-24 h-24 rounded-full mx-auto mb-8 object-cover"
           />
@@ -32,7 +33,7 @@ export function HeroSection() {
             >
               Tucows
             </a>
-            , architecting systems that power millions of domain registrations and web services globally.
+            .
           </p>
           
           <div className="pt-4">

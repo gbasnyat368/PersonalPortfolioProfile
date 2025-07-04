@@ -97,6 +97,24 @@ export const profileData = {
   ]
 };
 
+export const toolsData = [
+  { name: "Hibob", url: "https://www.hibob.com/" },
+  { name: "Greenhouse", url: "https://greenhouse.com/" },
+  { name: "Asana", url: "https://asana.com/" },
+  { name: "JIRA", url: "https://www.atlassian.com/software/jira" },
+  { name: "OpenProjects", url: "https://www.openproject.org/" },
+  { name: "Wrike", url: "https://www.wrike.com/" },
+  { name: "Slack", url: "https://slack.com/" },
+  { name: "Google Suite", url: "https://workspace.google.com/" },
+  { name: "Looker Studio", url: "https://cloud.google.com/looker-studio" },
+  { name: "OKR tools", url: "https://en.wikipedia.org/wiki/OKR" },
+  { name: "Amazon Connect", url: "https://aws.amazon.com/connect/" },
+  { name: "Iglass", url: "https://iglass.io/" },
+  { name: "Ally", url: "https://www.ally.com/" },
+  { name: "Lumapps", url: "https://www.lumapps.com/" },
+  { name: "Culture Amp", url: "https://www.cultureamp.com/" }
+];
+
 export const musicData = {
   featuredPlaylist: {
     title: "2025 Gestating Albums",
@@ -114,5 +132,23 @@ export const musicData = {
     { name: "Focus & Flow", description: "Deep work sessions" },
     { name: "Morning Motivation", description: "Start the day right" },
     { name: "Weekend Vibes", description: "Relax and unwind" }
+  ],
+  
+  tools: [
+    { name: "Hibob", url: "https://www.hibob.com/" },
+    { name: "Greenhouse", url: "https://greenhouse.com/" },
+    { name: "Asana", url: "https://asana.com/" },
+    { name: "JIRA", url: "https://www.atlassian.com/software/jira" },
+    { name: "OpenProjects", url: "https://www.openproject.org/" },
+    { name: "Wrike", url: "https://www.wrike.com/" },
+    { name: "Slack", url: "https://slack.com/" },
+    { name: "Google Suite", url: "https://workspace.google.com/" },
+    { name: "Looker Studio", url: "https://cloud.google.com/looker-studio" },
+    { name: "OKR tools", url: "https://en.wikipedia.org/wiki/OKR" },
+    { name: "Amazon Connect", url: "https://aws.amazon.com/connect/" },
+    { name: "Iglass", url: "https://iglass.io/" },
+    { name: "Ally", url: "https://www.ally.com/" },
+    { name: "Lumapps", url: "https://www.lumapps.com/" },
+    { name: "Culture Amp", url: "https://www.cultureamp.com/" }
   ]
 };
