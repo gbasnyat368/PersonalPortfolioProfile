@@ -117,6 +117,7 @@ Changelog:
 - July 04, 2025. Fixed profile photo path and updated hero section layout
 - July 04, 2025. Addressed deployment configuration issue - documented need for autoscale deployment instead of static
 - July 04, 2025. Updated deployment configuration with correct settings for autoscale deployment
+- July 04, 2025. Configured for GitHub Pages deployment - added static build, hybrid data loading, and GitHub Actions workflow
 ```
 
 ## User Preferences

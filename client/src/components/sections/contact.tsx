@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { profileData } from '@/lib/data';
+import { isStaticMode } from '@/lib/static-books';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -39,7 +40,17 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    contactMutation.mutate(formData);
+    
+    if (isStaticMode()) {
+      // In static mode, create a mailto link
+      const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
+      const body = encodeURIComponent(
+        `Hi Gaurav,\n\nMy name is ${formData.name}.\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`
+      );
+      window.location.href = `mailto:${profileData.email}?subject=${subject}&body=${body}`;
+    } else {
+      contactMutation.mutate(formData);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

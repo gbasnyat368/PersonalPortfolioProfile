@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Book } from '@shared/schema';
+import { staticBooks, getBooksByStatus, isStaticMode } from '@/lib/static-books';
 
 function BookCard({ book }: { book: Book }) {
   return (
@@ -47,17 +48,30 @@ function BookSkeleton() {
 }
 
 export function ReadingSection() {
+  const isStatic = isStaticMode();
+  
+  // Use static data for GitHub Pages, API for Replit
   const { data: currentlyReading, isLoading: loadingCurrently } = useQuery({
     queryKey: ['/api/books/currently-reading'],
+    enabled: !isStatic,
   });
 
   const { data: wantToRead, isLoading: loadingWant } = useQuery({
     queryKey: ['/api/books/to-read'],
+    enabled: !isStatic,
   });
 
   const { data: readBooks, isLoading: loadingRead } = useQuery({
     queryKey: ['/api/books/read'],
+    enabled: !isStatic,
   });
+
+  // Fallback to static data when in static mode
+  const finalCurrentlyReading = isStatic ? getBooksByStatus('currently-reading') : (currentlyReading || []);
+  const finalWantToRead = isStatic ? getBooksByStatus('to-read') : (wantToRead || []);
+  const finalReadBooks = isStatic ? getBooksByStatus('read') : (readBooks || []);
+  
+  const loading = !isStatic && (loadingCurrently || loadingWant || loadingRead);
 
   return (
     <section id="reading" className="py-20 bg-background">
@@ -78,10 +92,10 @@ export function ReadingSection() {
                 Currently Reading
               </h3>
               <div className="space-y-4">
-                {loadingCurrently ? (
+                {loading ? (
                   <BookSkeleton />
-                ) : currentlyReading && Array.isArray(currentlyReading) && currentlyReading.length > 0 ? (
-                  currentlyReading.slice(0, 3).map((book: Book) => (
+                ) : finalCurrentlyReading && Array.isArray(finalCurrentlyReading) && finalCurrentlyReading.length > 0 ? (
+                  finalCurrentlyReading.slice(0, 3).map((book: Book) => (
                     <BookCard key={book.id} book={book} />
                   ))
                 ) : (
@@ -102,10 +116,10 @@ export function ReadingSection() {
                 Want to Read
               </h3>
               <div className="space-y-4">
-                {loadingWant ? (
+                {loading ? (
                   <BookSkeleton />
-                ) : wantToRead && Array.isArray(wantToRead) && wantToRead.length > 0 ? (
-                  wantToRead.slice(0, 3).map((book: Book) => (
+                ) : finalWantToRead && Array.isArray(finalWantToRead) && finalWantToRead.length > 0 ? (
+                  finalWantToRead.slice(0, 3).map((book: Book) => (
                     <BookCard key={book.id} book={book} />
                   ))
                 ) : (
@@ -126,10 +140,10 @@ export function ReadingSection() {
                 Recently Read
               </h3>
               <div className="space-y-4">
-                {loadingRead ? (
+                {loading ? (
                   <BookSkeleton />
-                ) : readBooks && Array.isArray(readBooks) && readBooks.length > 0 ? (
-                  readBooks.slice(0, 3).map((book: Book) => (
+                ) : finalReadBooks && Array.isArray(finalReadBooks) && finalReadBooks.length > 0 ? (
+                  finalReadBooks.slice(0, 3).map((book: Book) => (
                     <BookCard key={book.id} book={book} />
                   ))
                 ) : (
