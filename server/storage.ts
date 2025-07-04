@@ -26,6 +26,50 @@ export class MemStorage implements IStorage {
     this.currentUserId = 1;
     this.currentBookId = 1;
     this.currentMessageId = 1;
+    
+    // Add some sample books for testing
+    this.initializeSampleData();
+  }
+
+  private initializeSampleData() {
+    const sampleBooks = [
+      {
+        title: "Revolusi: Indonesia and the Birth of the Modern World",
+        author: "David Van Reybrouck",
+        status: "currently-reading",
+        rating: null,
+        imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1742428617l/228748489._SX50_.jpg",
+        goodreadsUrl: "https://www.goodreads.com/book/show/228748489",
+        dateAdded: "2025-07-02"
+      },
+      {
+        title: "Butter: A Novel of Food and Murder",
+        author: "Asako Yuzuki",
+        status: "to-read",
+        rating: null,
+        imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1724011874l/213212694._SY75_.jpg",
+        goodreadsUrl: "https://www.goodreads.com/book/show/213212694",
+        dateAdded: "2025-07-01"
+      },
+      {
+        title: "Athens: A History of the World's First Democracy",
+        author: "Thomas N. Mitchell",
+        status: "to-read",
+        rating: null,
+        imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1557782392l/43309953._SY75_.jpg",
+        goodreadsUrl: "https://www.goodreads.com/book/show/43309953",
+        dateAdded: "2025-07-01"
+      }
+    ];
+
+    for (const book of sampleBooks) {
+      const id = this.currentBookId++;
+      const bookEntity: Book = { 
+        ...book, 
+        id
+      };
+      this.books.set(id, bookEntity);
+    }
   }
 
   async getUser(id: number): Promise<User | undefined> {
@@ -55,7 +99,14 @@ export class MemStorage implements IStorage {
 
   async createBook(insertBook: InsertBook): Promise<Book> {
     const id = this.currentBookId++;
-    const book: Book = { ...insertBook, id };
+    const book: Book = { 
+      ...insertBook, 
+      id,
+      rating: insertBook.rating ?? null,
+      imageUrl: insertBook.imageUrl ?? null,
+      goodreadsUrl: insertBook.goodreadsUrl ?? null,
+      dateAdded: insertBook.dateAdded ?? null
+    };
     this.books.set(id, book);
     return book;
   }
@@ -67,7 +118,14 @@ export class MemStorage implements IStorage {
     
     for (const bookData of newBooks) {
       const id = this.currentBookId++;
-      const book: Book = { ...bookData, id };
+      const book: Book = { 
+        ...bookData, 
+        id,
+        rating: bookData.rating ?? null,
+        imageUrl: bookData.imageUrl ?? null,
+        goodreadsUrl: bookData.goodreadsUrl ?? null,
+        dateAdded: bookData.dateAdded ?? null
+      };
       this.books.set(id, book);
     }
   }

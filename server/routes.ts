@@ -7,55 +7,67 @@ import { z } from "zod";
 // RSS feed parser
 async function parseGoodreadsRSS(rssUrl: string): Promise<InsertBook[]> {
   try {
+    console.log('Fetching RSS feed...');
     const response = await fetch(rssUrl);
     const xmlText = await response.text();
+    console.log('RSS response length:', xmlText.length);
+    console.log('RSS sample:', xmlText.substring(0, 500));
     
     // Simple XML parsing for RSS feed
     const books: InsertBook[] = [];
-    const itemRegex = /<item>(.*?)<\/item>/gs;
-    const matches = xmlText.match(itemRegex);
+    const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+    const matches = Array.from(xmlText.matchAll(itemRegex));
+    console.log('Found matches:', matches.length);
     
-    if (matches) {
+    if (matches && matches.length > 0) {
       for (const match of matches) {
-        const titleMatch = match.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/);
-        const descriptionMatch = match.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/);
-        const linkMatch = match.match(/<link>(.*?)<\/link>/);
+        const itemContent = match[1];
         
-        if (titleMatch && descriptionMatch) {
-          const title = titleMatch[1];
-          const description = descriptionMatch[1];
-          const link = linkMatch ? linkMatch[1] : '';
-          
-          // Extract author from description
-          const authorMatch = description.match(/author:\s*(.*?)\s*<br/i);
-          const author = authorMatch ? authorMatch[1] : 'Unknown Author';
-          
-          // Extract rating if available
-          const ratingMatch = description.match(/rating:\s*(\d+)/i);
-          const rating = ratingMatch ? ratingMatch[1] : '';
-          
-          // Extract image URL if available
-          const imageMatch = description.match(/src="(.*?)"/);
-          const imageUrl = imageMatch ? imageMatch[1] : '';
-          
-          // Determine status based on shelf information
-          let status = 'read';
-          if (description.includes('currently-reading')) {
+        // Extract title
+        const titleMatch = itemContent.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/);
+        const title = titleMatch ? titleMatch[1] : 'Unknown Title';
+        
+        // Extract author
+        const authorMatch = itemContent.match(/<author_name>(.*?)<\/author_name>/);
+        const author = authorMatch ? authorMatch[1] : 'Unknown Author';
+        
+        // Extract image URL
+        const imageMatch = itemContent.match(/<book_image_url><!\[CDATA\[(.*?)\]\]><\/book_image_url>/);
+        const imageUrl = imageMatch ? imageMatch[1] : null;
+        
+        // Extract link
+        const linkMatch = itemContent.match(/<link><!\[CDATA\[(.*?)\]\]><\/link>/);
+        const goodreadsUrl = linkMatch ? linkMatch[1] : null;
+        
+        // Extract user rating
+        const ratingMatch = itemContent.match(/<user_rating>(\d+)<\/user_rating>/);
+        const rating = ratingMatch && ratingMatch[1] !== '0' ? ratingMatch[1] : null;
+        
+        // Extract user shelves to determine status
+        const shelfMatch = itemContent.match(/<user_shelves>(.*?)<\/user_shelves>/);
+        let status = 'read';
+        if (shelfMatch) {
+          const shelf = shelfMatch[1];
+          if (shelf.includes('currently-reading')) {
             status = 'currently-reading';
-          } else if (description.includes('to-read')) {
+          } else if (shelf.includes('to-read')) {
             status = 'to-read';
           }
-          
-          books.push({
-            title,
-            author,
-            status,
-            rating,
-            imageUrl,
-            goodreadsUrl: link,
-            dateAdded: new Date().toISOString()
-          });
         }
+        
+        // Extract date added
+        const dateMatch = itemContent.match(/<user_date_added><!\[CDATA\[(.*?)\]\]><\/user_date_added>/);
+        const dateAdded = dateMatch ? dateMatch[1] : new Date().toISOString();
+        
+        books.push({
+          title,
+          author,
+          status,
+          rating,
+          imageUrl,
+          goodreadsUrl,
+          dateAdded
+        });
       }
     }
     
@@ -94,11 +106,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const rssUrl = process.env.GOODREADS_RSS_URL || 
         "https://www.goodreads.com/review/list_rss/23439056?key=2oWlkvBOQmdRhpMPL2jM3Z6saXMyyASCUe0mDM3ZFgFa8_LJ&shelf=%23ALL%23";
       
+      console.log('Fetching RSS feed from:', rssUrl);
       const books = await parseGoodreadsRSS(rssUrl);
+      console.log('Parsed books:', books.length, books.slice(0, 2));
       await storage.updateBooks(books);
       
       res.json({ message: "Books synced successfully", count: books.length });
     } catch (error) {
+      console.error('Sync error:', error);
       res.status(500).json({ error: "Failed to sync books" });
     }
   });

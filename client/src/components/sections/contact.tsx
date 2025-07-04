@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Phone, Mail, MapPin, Linkedin, Send } from 'lucide-react';
+import { Phone, Mail, Linkedin, Send } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -85,15 +85,7 @@ export function ContactSection() {
                   </div>
                 </div>
                 
-                <div className="flex items-center">
-                  <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center mr-4">
-                    <MapPin className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-900">Location</p>
-                    <p className="text-slate-600">{profileData.location}</p>
-                  </div>
-                </div>
+
                 
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-4">

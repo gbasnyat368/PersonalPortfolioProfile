@@ -4,6 +4,7 @@ import { Navigation } from '@/components/navigation';
 import { HeroSection } from '@/components/sections/hero';
 import { ExperienceSection } from '@/components/sections/experience';
 import { SkillsSection } from '@/components/sections/skills';
+import { EducationSection } from '@/components/sections/education';
 import { ReadingSection } from '@/components/sections/reading';
 import { MusicSection } from '@/components/sections/music';
 import { ContactSection } from '@/components/sections/contact';
@@ -32,6 +33,7 @@ export default function ProfilePage() {
       <HeroSection />
       <ExperienceSection />
       <SkillsSection />
+      <EducationSection />
       <ReadingSection />
       <MusicSection />
       <ContactSection />
