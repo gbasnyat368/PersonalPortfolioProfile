@@ -7,47 +7,41 @@ export function HeroSection() {
   const { scrollToSection } = useSmoothScroll();
 
   return (
-    <section id="about" className="pt-16 pb-16 gradient-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <div className="mb-8">
-            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden shadow-xl border-4 border-white/20">
-              <img 
-                src="/attached_assets/profile photo_1751643993008.jpg" 
-                alt="Gaurav Basnyat"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+    <section id="about" className="min-h-screen flex items-center justify-center bg-background">
+      <div className="max-w-2xl mx-auto px-6 text-center">
+        <div className="mb-12">
+          <img
+            src="/attached_assets/profile photo_1751643993008.jpg"
+            alt="Gaurav Basnyat"
+            className="w-24 h-24 rounded-full mx-auto mb-8 object-cover"
+          />
+          <h1 className="text-5xl font-light text-foreground mb-6 tracking-tight">
             {profileData.name}
           </h1>
-          
-          <p className="text-xl text-blue-100 mb-2">{profileData.credentials}</p>
-          <p className="text-lg text-blue-100 mb-8">{profileData.title}</p>
-          
-          <div 
-            className="text-white/90 max-w-3xl mx-auto mb-8 text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: profileData.summary }}
-          />
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              onClick={() => scrollToSection('contact')}
-              className="bg-white text-primary hover:bg-blue-50 px-6 py-3 rounded-lg font-medium"
+        </div>
+        
+        <div className="space-y-8">
+          <p className="text-xl text-muted-foreground leading-relaxed font-light">
+            I'm a technology leader with over 15 years of experience in designing and implementing scalable solutions. 
+            Currently I work at{" "}
+            <a 
+              href="https://www.tucows.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-muted-foreground transition-colors underline decoration-1 underline-offset-2"
             >
-              Get In Touch
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            
-            <Button
-              variant="outline"
+              Tucows
+            </a>
+            , architecting systems that power millions of domain registrations and web services globally.
+          </p>
+          
+          <div className="pt-4">
+            <Button 
+              size="lg" 
+              className="bg-foreground hover:bg-foreground/90 text-background font-medium px-8 py-3 rounded-full"
               onClick={() => scrollToSection('experience')}
-              className="border-white text-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium"
             >
-              <FileText className="mr-2 h-4 w-4" />
-              View Experience
+              View My Work
             </Button>
           </div>
         </div>

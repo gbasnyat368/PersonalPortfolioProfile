@@ -7,19 +7,32 @@ import type { Book } from '@shared/schema';
 
 function BookCard({ book }: { book: Book }) {
   return (
-    <div className="bg-white/10 p-4 rounded-lg book-card">
-      <p className="font-semibold mb-2 text-white">{book.title}</p>
-      <p className="text-white/80 text-sm mb-2">by {book.author}</p>
-      {book.rating && (
-        <div className="flex items-center">
-          <div className="flex text-yellow-400 text-xs">
-            {'★'.repeat(Math.floor(Number(book.rating)))}
-            {'☆'.repeat(5 - Math.floor(Number(book.rating)))}
+    <Card className="group cursor-pointer border border-border hover:shadow-lg transition-all duration-300 rounded-2xl bg-card">
+      <CardContent className="p-6">
+        <div className="flex items-start space-x-4">
+          <div className="flex-shrink-0">
+            <img 
+              src={book.imageUrl ?? '/placeholder-book.jpg'} 
+              alt={book.title}
+              className="w-16 h-24 object-cover rounded-lg"
+            />
           </div>
-          <span className="text-white/80 text-xs ml-2">{book.rating}</span>
+          <div className="flex-1">
+            <h3 className="font-medium text-foreground mb-1 line-clamp-2">{book.title}</h3>
+            <p className="text-muted-foreground text-sm mb-2">by {book.author}</p>
+            {book.rating && (
+              <div className="flex items-center">
+                <div className="flex text-yellow-400 text-xs">
+                  {'★'.repeat(Math.floor(Number(book.rating)))}
+                  {'☆'.repeat(5 - Math.floor(Number(book.rating)))}
+                </div>
+                <span className="text-muted-foreground text-xs ml-2">{book.rating}</span>
+              </div>
+            )}
+          </div>
         </div>
-      )}
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -47,7 +60,7 @@ export function ReadingSection() {
   });
 
   return (
-    <section id="reading" className="py-16 bg-white">
+    <section id="reading" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">My Reading Journey</h2>
@@ -67,7 +80,7 @@ export function ReadingSection() {
               <div className="space-y-4">
                 {loadingCurrently ? (
                   <BookSkeleton />
-                ) : currentlyReading && currentlyReading.length > 0 ? (
+                ) : currentlyReading && Array.isArray(currentlyReading) && currentlyReading.length > 0 ? (
                   currentlyReading.slice(0, 3).map((book: Book) => (
                     <BookCard key={book.id} book={book} />
                   ))
@@ -91,7 +104,7 @@ export function ReadingSection() {
               <div className="space-y-4">
                 {loadingWant ? (
                   <BookSkeleton />
-                ) : wantToRead && wantToRead.length > 0 ? (
+                ) : wantToRead && Array.isArray(wantToRead) && wantToRead.length > 0 ? (
                   wantToRead.slice(0, 3).map((book: Book) => (
                     <BookCard key={book.id} book={book} />
                   ))
@@ -115,7 +128,7 @@ export function ReadingSection() {
               <div className="space-y-4">
                 {loadingRead ? (
                   <BookSkeleton />
-                ) : readBooks && readBooks.length > 0 ? (
+                ) : readBooks && Array.isArray(readBooks) && readBooks.length > 0 ? (
                   readBooks.slice(0, 3).map((book: Book) => (
                     <BookCard key={book.id} book={book} />
                   ))

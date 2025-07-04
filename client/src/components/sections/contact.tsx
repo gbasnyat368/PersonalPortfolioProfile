@@ -50,12 +50,12 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Let's Connect</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Ready to discuss your next project or explore opportunities for collaboration
+    <section id="contact" className="py-20 bg-background">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-light text-foreground mb-8 tracking-tight">Get in touch</h2>
+          <p className="text-xl text-muted-foreground font-light">
+            Hit me up if you're interested in working together
           </p>
         </div>
 
