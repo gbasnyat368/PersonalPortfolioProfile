@@ -93,6 +93,8 @@ This is a personal portfolio website for Gaurav Basnyat, a Senior Solution Archi
 ```
 Changelog:
 - July 04, 2025. Initial setup
+- July 04, 2025. Applied Kerem.co minimalist theme transformation - clean white background, light typography, card-based layouts
+- July 04, 2025. Fixed profile photo path and updated hero section layout
 ```
 
 ## User Preferences
