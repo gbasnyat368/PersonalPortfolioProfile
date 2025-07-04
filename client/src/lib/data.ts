@@ -8,7 +8,7 @@ export const profileData = {
   linkedin: "https://www.linkedin.com/in/gauravbasnyat",
   goodreads: "https://www.goodreads.com/user/show/23439056-gaurav",
   
-  summary: "Solution Architect with over a decade of experience in delivering complex projects across various domains and industries. Currently designing and implementing business and technology solutions at Tucows, a leading provider of internet services.",
+  summary: "Solution Architect with over a decade of experience in delivering complex projects across various domains and industries. Currently designing and implementing business and technology solutions at <a href='https://www.tucows.com/' target='_blank' rel='noopener noreferrer' class='text-blue-200 hover:text-white underline'>Tucows</a>.",
   
   experience: [
     {

@@ -11,8 +11,12 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="mb-8">
-            <div className="w-32 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
-              <User className="h-16 w-16 text-slate-400" />
+            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden shadow-xl border-4 border-white/20">
+              <img 
+                src="/attached_assets/profile photo_1751643993008.jpg" 
+                alt="Gaurav Basnyat"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
           
@@ -23,9 +27,10 @@ export function HeroSection() {
           <p className="text-xl text-blue-100 mb-2">{profileData.credentials}</p>
           <p className="text-lg text-blue-100 mb-8">{profileData.title}</p>
           
-          <p className="text-white/90 max-w-3xl mx-auto mb-8 text-lg leading-relaxed">
-            {profileData.summary}
-          </p>
+          <div 
+            className="text-white/90 max-w-3xl mx-auto mb-8 text-lg leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: profileData.summary }}
+          />
           
           <div className="flex flex-wrap justify-center gap-4">
             <Button
