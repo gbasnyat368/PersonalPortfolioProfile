@@ -92,7 +92,21 @@ This is a personal portfolio website for Gaurav Basnyat, a Senior Solution Archi
 - **Deployment Target**: Must be set to `autoscale` (not static)
 - **Build Command**: `npm run build` (builds both client and server)
 - **Run Command**: `npm start` (starts the Express server)
+- **Public Directory**: `dist/public` (contains the built client files)
 - **Port**: Application runs on port 5000 with both API and static file serving
+
+### Required .replit Configuration Changes
+The following settings must be configured in the Replit deployment interface:
+
+```
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
+run = ["npm", "start"]
+publicDir = "dist/public"
+```
+
+**Important**: The deployment will fail if set to "static" because this is a full-stack Express application with API routes.
 
 ## Changelog
 
@@ -102,6 +116,7 @@ Changelog:
 - July 04, 2025. Applied Kerem.co minimalist theme transformation - clean white background, light typography, card-based layouts
 - July 04, 2025. Fixed profile photo path and updated hero section layout
 - July 04, 2025. Addressed deployment configuration issue - documented need for autoscale deployment instead of static
+- July 04, 2025. Updated deployment configuration with correct settings for autoscale deployment
 ```
 
 ## User Preferences
