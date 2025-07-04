@@ -13,7 +13,7 @@ export function ExperienceSection() {
     <section id="experience" className="py-20 bg-background">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-light text-foreground mb-4 tracking-tight">Work</h2>
+          <h2 className="text-5xl font-serif text-foreground mb-4 tracking-tight font-medium">Work</h2>
         </div>
 
         <div className="space-y-8">

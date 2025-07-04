@@ -7,7 +7,7 @@ export function ToolsSection() {
     <section id="tools" className="py-20 bg-muted/30">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-light text-foreground mb-4 tracking-tight">Tools Proficiency</h2>
+          <h2 className="text-5xl font-serif text-foreground mb-4 tracking-tight font-medium">Tools Proficiency</h2>
         </div>
 
         <Card className="border border-border hover:shadow-lg transition-all duration-300 rounded-2xl bg-card">

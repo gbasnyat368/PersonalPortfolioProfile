@@ -53,7 +53,7 @@ export function ContactSection() {
     <section id="contact" className="py-20 bg-background">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-light text-foreground mb-8 tracking-tight">Get in touch</h2>
+          <h2 className="text-5xl font-serif text-foreground mb-8 tracking-tight font-medium">Get in touch</h2>
           <p className="text-xl text-muted-foreground font-light">
             Hit me up if you're interested in working together
           </p>

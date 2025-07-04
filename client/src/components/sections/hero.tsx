@@ -16,20 +16,20 @@ export function HeroSection() {
             alt="Gaurav Basnyat"
             className="w-24 h-24 rounded-full mx-auto mb-8 object-cover"
           />
-          <h1 className="text-5xl font-light text-foreground mb-6 tracking-tight">
+          <h1 className="text-6xl font-serif text-foreground mb-6 tracking-tight font-medium">
             {profileData.name}
           </h1>
         </div>
         
         <div className="space-y-8">
-          <p className="text-xl text-muted-foreground leading-relaxed font-light">
+          <p className="text-xl text-muted-foreground leading-relaxed font-light font-sans">
             I'm a technology leader with over 15 years of experience in designing and implementing scalable solutions. 
             Currently I work at{" "}
             <a 
               href="https://www.tucows.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-foreground hover:text-muted-foreground transition-colors underline decoration-1 underline-offset-2"
+              className="text-accent hover:text-primary transition-colors underline decoration-1 underline-offset-4"
             >
               Tucows
             </a>
@@ -39,7 +39,7 @@ export function HeroSection() {
           <div className="pt-4">
             <Button 
               size="lg" 
-              className="bg-foreground hover:bg-foreground/90 text-background font-medium px-8 py-3 rounded-full"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-10 py-4 rounded-full font-sans text-base shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={() => scrollToSection('experience')}
             >
               View My Work
