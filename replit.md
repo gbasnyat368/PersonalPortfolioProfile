@@ -78,15 +78,21 @@ This is a personal portfolio website for Gaurav Basnyat, a Senior Solution Archi
 - Replit-specific plugins for development environment
 
 ### Production
-- Vite builds the client-side application
-- ESBuild bundles the server code
-- Static assets served from Express
-- Database migrations handled by Drizzle Kit
+- **Build Process**: Vite builds client-side application to `dist/public`, ESBuild bundles server code to `dist/index.js`
+- **Server**: Express server serves static assets and API endpoints
+- **Database**: PostgreSQL with Drizzle ORM for data persistence
+- **Deployment Type**: Requires Autoscale deployment (not static) due to server-side components
 
 ### Environment Configuration
 - `NODE_ENV` for environment detection
 - `DATABASE_URL` for database connection
 - Vite handles environment-specific builds
+
+### Deployment Configuration
+- **Deployment Target**: Must be set to `autoscale` (not static)
+- **Build Command**: `npm run build` (builds both client and server)
+- **Run Command**: `npm start` (starts the Express server)
+- **Port**: Application runs on port 5000 with both API and static file serving
 
 ## Changelog
 
@@ -95,6 +101,7 @@ Changelog:
 - July 04, 2025. Initial setup
 - July 04, 2025. Applied Kerem.co minimalist theme transformation - clean white background, light typography, card-based layouts
 - July 04, 2025. Fixed profile photo path and updated hero section layout
+- July 04, 2025. Addressed deployment configuration issue - documented need for autoscale deployment instead of static
 ```
 
 ## User Preferences
