@@ -70,5 +70,21 @@ export const getBooksByStatus = (status: string): Book[] => {
 
 export const isStaticMode = (): boolean => {
   // Check if we're in a static deployment environment
-  return typeof window !== 'undefined' && !window.location.hostname.includes('replit');
+  if (typeof window === 'undefined') return false;
+  
+  const hostname = window.location.hostname;
+  
+  // GitHub Pages detection
+  if (hostname.includes('github.io') || hostname.includes('githubusercontent.com')) {
+    return true;
+  }
+  
+  // Replit detection (use dynamic mode)
+  if (hostname.includes('replit') || hostname.includes('repl.co')) {
+    return false;
+  }
+  
+  // For other deployments, try to detect if API is available
+  // Default to static mode for safety
+  return true;
 };
