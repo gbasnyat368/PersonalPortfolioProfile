@@ -34,7 +34,9 @@ jobs:
       run: npm ci
       
     - name: Build application for static deployment
-      run: npx vite build --config vite.config.static.ts
+      run: |
+        cd client
+        npx vite build --outDir ../dist --base ./ --emptyOutDir
       env:
         NODE_ENV: production
         

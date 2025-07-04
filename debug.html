@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - GitHub Pages</title>
+</head>
+<body>
+    <h1>Debug Page for GitHub Pages</h1>
+    <p>Current URL: <span id="url"></span></p>
+    <p>Current hostname: <span id="hostname"></span></p>
+    <p>Base URL: <span id="baseUrl"></span></p>
+    
+    <script>
+        document.getElementById('url').textContent = window.location.href;
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('baseUrl').textContent = window.location.pathname;
+        
+        // Test asset loading
+        console.log('Debug page loaded');
+        console.log('Current URL:', window.location.href);
+        console.log('Expected GitHub Pages URL format:', 'https://username.github.io/repository-name/');
+    </script>
+</body>
+</html>
