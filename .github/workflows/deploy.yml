@@ -35,19 +35,35 @@ jobs:
       
     - name: Build application for static deployment
       run: |
-        # Copy and modify tailwind config for client directory
+        # Create a simple vite config in client directory
+        cat > client/vite.config.ts << 'EOF'
+        import { defineConfig } from "vite";
+        import react from "@vitejs/plugin-react";
+        import path from "path";
+
+        export default defineConfig({
+          plugins: [react()],
+          resolve: {
+            alias: {
+              "@": path.resolve(__dirname, "src"),
+              "@shared": path.resolve(__dirname, "..", "shared"),
+              "@assets": path.resolve(__dirname, "..", "attached_assets"),
+            },
+          },
+          build: {
+            outDir: "../dist",
+            emptyOutDir: true,
+          },
+          base: "./",
+        });
+        EOF
+        
+        # Update tailwind config content paths
         cp tailwind.config.ts client/tailwind.config.ts
         sed -i 's|"./client/index.html", "./client/src/\*\*/\*\.{js,jsx,ts,tsx}"|"./index.html", "./src/**/*.{js,jsx,ts,tsx}"|g' client/tailwind.config.ts
         
-        # Copy and modify postcss config for client directory
+        # Copy postcss config
         cp postcss.config.js client/postcss.config.js
-        
-        # Copy and modify vite config for client directory  
-        cp vite.config.ts client/vite.config.ts
-        sed -i 's|"./client/index.html"|"./index.html"|g' client/vite.config.ts
-        sed -i 's|"./client/src"|"./src"|g' client/vite.config.ts
-        sed -i 's|outDir: "dist"|outDir: "../dist"|g' client/vite.config.ts
-        sed -i 's|base: "/"|base: "./"|g' client/vite.config.ts
         
         cd client
         npx vite build
