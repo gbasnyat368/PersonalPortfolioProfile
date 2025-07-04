@@ -147,7 +147,7 @@ export const musicData = {
     { name: "OKR tools", url: "https://en.wikipedia.org/wiki/OKR" },
     { name: "Amazon Connect", url: "https://aws.amazon.com/connect/" },
     { name: "Iglass", url: "https://iglass.io/" },
-    { name: "Ally", url: "https://www.ally.com/" },
+    { name: "Ally", url: "https://ally.io/" },
     { name: "Lumapps", url: "https://www.lumapps.com/" },
     { name: "Culture Amp", url: "https://www.cultureamp.com/" }
   ]
