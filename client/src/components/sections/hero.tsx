@@ -11,7 +11,7 @@ export function HeroSection() {
       <div className="max-w-2xl mx-auto px-6 text-center">
         <div className="mb-12">
           <img
-            src="/attached_assets/profile photo_1751643993008.jpg"
+            src="/attached_assets/profile photo_1751644618081.jpg"
             alt="Gaurav Basnyat"
             className="w-24 h-24 rounded-full mx-auto mb-8 object-cover"
           />
