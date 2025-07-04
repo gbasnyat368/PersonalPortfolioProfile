@@ -35,8 +35,30 @@ jobs:
       
     - name: Build application for static deployment
       run: |
+        # Create a temporary vite config in client directory with proper aliases
+        cat > client/vite.config.temp.ts << 'EOF'
+        import { defineConfig } from "vite";
+        import react from "@vitejs/plugin-react";
+        import path from "path";
+
+        export default defineConfig({
+          plugins: [react()],
+          resolve: {
+            alias: {
+              "@": path.resolve(__dirname, "src"),
+              "@shared": path.resolve(__dirname, "..", "shared"),
+              "@assets": path.resolve(__dirname, "..", "attached_assets"),
+            },
+          },
+          build: {
+            outDir: "../dist",
+            emptyOutDir: true,
+          },
+          base: "./",
+        });
+        EOF
         cd client
-        npx vite build --outDir ../dist --base ./ --emptyOutDir
+        npx vite build --config vite.config.temp.ts
       env:
         NODE_ENV: production
         
